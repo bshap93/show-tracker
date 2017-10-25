@@ -2,6 +2,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { addPopularShow } from '../actions/addPopularShow.js'
+import ShowCard from '../components/ShowCard.js'
 
 class Home extends React.Component {
   constructor() {
@@ -31,7 +32,7 @@ class Home extends React.Component {
   render() {
     try {
       var popShows = this.props.popularShows.map((show, index) =>
-        <p>{show.title}, {show.year}</p>
+        <ShowCard title={show.title} posterUrl={show.posterUrl} year={show.year} />
       )
     } catch(err) {
       console.log(err)
@@ -46,6 +47,7 @@ class Home extends React.Component {
         <p className="well">
           Get notified when all the shows you watch are on,<br/> no matter how long the break between seasons.
         </p>
+        <h1 className="">Popular Shows</h1>
         {popShows}
       </div>
     )

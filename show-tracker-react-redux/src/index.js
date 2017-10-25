@@ -9,7 +9,7 @@ import { combineReducers } from 'redux';
 import rootReducer from './reducers/index.js'
 const scrapeIt = require("scrape-it");
 
-
+debugger
 
 
 const store = createStore(rootReducer);

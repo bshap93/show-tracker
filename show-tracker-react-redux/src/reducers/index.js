@@ -10,8 +10,20 @@ function popularShowReducer(state = [], action) {
   }
 };
 
+function searhedShowReducer(state = [], action) {
+  switch (action.type) {
+    case 'ADD_SEARCHED_SHOW':
+      return state.concat(action.searchedShow)
+    case 'CLEAR_SEARCHED_SHOWS':
+      return [];
+    default:
+      return state;
+  }
+};
+
 const rootReducer = combineReducers({
-  popularShows: popularShowReducer
+  popularShows: popularShowReducer,
+  searchedShows: searhedShowReducer
 })
 
 export default rootReducer
