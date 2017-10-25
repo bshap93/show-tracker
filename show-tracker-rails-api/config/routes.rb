@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  get 'my_shows_controller/create'
+
+  get 'my_shows_controller/update'
+
+  get 'my_shows_controller/destroy'
+
+  get 'my_shows_controller/index'
+
+  get 'my_shows_controller/show'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
