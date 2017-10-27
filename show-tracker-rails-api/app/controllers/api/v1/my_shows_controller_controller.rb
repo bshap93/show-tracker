@@ -1,4 +1,4 @@
-class MyShowsControllerController < ApplicationController
+class Api::V1::MyShowsControllerController < ApplicationController
   def create
   end
 

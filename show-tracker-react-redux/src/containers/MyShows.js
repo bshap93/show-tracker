@@ -16,8 +16,13 @@ class MyShows extends React.Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:3001/my_shows", {credentials: 'same-origin'})
-      .then(resp => resp.json())
+    fetch("/api/v1/my_shows", {credentials: 'same-origin'})
+      .then(resp =>
+        {
+          debugger
+          resp.json()
+        }
+      )
       .then(json => {
         console.log(json)
       })

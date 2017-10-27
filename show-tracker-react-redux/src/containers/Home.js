@@ -24,7 +24,6 @@ class Home extends React.Component {
       },
     }).then(response => response.json())
       .then(json => json.forEach((popularShow) => {
-        debugger
         var action = this.props.addPopularShow(popularShow)
         console.log(this.props.store.getState())
       })
