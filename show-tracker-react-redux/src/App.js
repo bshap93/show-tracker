@@ -8,11 +8,13 @@ import NavBar from './components/NavBar.js'
 import Home from './containers/Home.js'
 import ShowsSearch from './containers/ShowsSearch.js'
 import MyShows from './containers/MyShows.js'
+import Header from './components/Header.js'
 
 class App extends Component {
   render() {
     return (
       <div className="App">
+        <Header />
         <Router>
           <div>
             <NavBar />

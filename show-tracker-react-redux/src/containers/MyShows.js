@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { addSearchedShow, clearSearchedShows } from '../actions/addSearchedShow.js';
+import { addMyShow } from '../actions/addMyShow.js';
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import ShowCard from '../components/ShowCard.js'
@@ -17,15 +17,11 @@ class MyShows extends React.Component {
 
   componentDidMount() {
     fetch("/api/v1/my_shows", {credentials: 'same-origin'})
-      .then(resp =>
-        {
-          debugger
-          resp.json()
-        }
-      )
-      .then(json => {
-        console.log(json)
-      })
+      .then(resp => resp.json())
+      .then(json => json.forEach((myShow) => {
+        var action = this.props.addMyShow(myShow)
+        console.log(this.props.store.getState())
+      }))
   }
 
   render(){
@@ -38,17 +34,15 @@ class MyShows extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  // return {
-  //   searchedShows: state.searchedShows,
-  //   title: state.title
-  // }
+  return {
+    myShows: state.myShows,
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  // return bindActionCreators({
-  //   addSearchedShow: addSearchedShow,
-  //   clearSearchedShows: clearSearchedShows
-  // }, dispatch);
+  return bindActionCreators({
+    addMyShow: addMyShow,
+  }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyShows)

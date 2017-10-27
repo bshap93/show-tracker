@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { addPopularShow } from '../actions/addPopularShow.js'
 import ShowCard from '../components/ShowCard.js'
-import Header from '../components/Header.js'
+
 
 class Home extends React.Component {
   constructor() {
@@ -24,6 +24,9 @@ class Home extends React.Component {
       },
     }).then(response => response.json())
       .then(json => json.forEach((popularShow) => {
+        if (popularShow.trailer) {
+          popularShow.trailer = popularShow.trailer.replace("watch?v=", "embed/")
+        }
         var action = this.props.addPopularShow(popularShow)
         console.log(this.props.store.getState())
       })
@@ -41,7 +44,7 @@ class Home extends React.Component {
     }
     return (
       <div>
-        <Header />
+
         <h1 className="">Popular Shows</h1>
         {popShows}
       </div>

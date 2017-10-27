@@ -21,9 +21,20 @@ function searhedShowReducer(state = [], action) {
   }
 };
 
+
+function myShowReducer(state = [], action) {
+  switch (action.type) {
+    case 'ADD_MY_SHOW':
+      return state.concat(action.myShow)
+    default:
+      return state;
+  }
+}
+
 const rootReducer = combineReducers({
   popularShows: popularShowReducer,
-  searchedShows: searhedShowReducer
+  searchedShows: searhedShowReducer,
+  myShows: myShowReducer,
 })
 
 export default rootReducer
