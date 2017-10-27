@@ -15,6 +15,14 @@ class MyShows extends React.Component {
     };
   }
 
+  componentDidMount() {
+    fetch("http://localhost:3001/my_shows", {credentials: 'same-origin'})
+      .then(resp => resp.json())
+      .then(json => {
+        console.log(json)
+      })
+  }
+
   render(){
     return (
       <div>

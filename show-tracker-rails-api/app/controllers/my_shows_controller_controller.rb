@@ -9,6 +9,8 @@ class MyShowsControllerController < ApplicationController
   end
 
   def index
+    @my_shows = MyShow.all
+    render json: @my_shows
   end
 
   def show

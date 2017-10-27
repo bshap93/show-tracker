@@ -15,7 +15,7 @@ class Home extends React.Component {
 
   componentDidMount() {
 
-    var popularShowsResp = fetch("https://api.trakt.tv/shows/popular", {
+    var popularShowsResp = fetch("https://api.trakt.tv/shows/popular?extended=full", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -24,6 +24,7 @@ class Home extends React.Component {
       },
     }).then(response => response.json())
       .then(json => json.forEach((popularShow) => {
+        debugger
         var action = this.props.addPopularShow(popularShow)
         console.log(this.props.store.getState())
       })
@@ -33,7 +34,7 @@ class Home extends React.Component {
   render() {
     try {
       var popShows = this.props.popularShows.map((show, index) =>
-        <ShowCard title={show.title} posterUrl={show.posterUrl} year={show.year} />
+        <ShowCard title={show.title} trailerUrl={show.trailer} year={show.year} />
       )
     } catch(err) {
       console.log(err)
