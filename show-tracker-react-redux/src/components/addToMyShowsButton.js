@@ -1,13 +1,17 @@
 import React from 'react';
 
-const AddToMyShowsButton = (props) => {
-  return (
-    <button onClick={handleOnClick(props.show)}>Add to My Shows</button>
-  )
+class AddToMyShowsButton extends React.Component {
+  function handleOnClick(show) {
+
+  }
+
+  render() {
+    return (
+      <button onClick={this.handleOnClick}>Add to My Shows</button>
+    )
+  }
 }
 
-function handleOnClick(show) {
 
-}
 
 export default AddToMyShowsButton

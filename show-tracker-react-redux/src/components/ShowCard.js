@@ -6,13 +6,13 @@ class MoviesAbout extends React.Component {
     if (this.props.trailerUrl) {
       var trailer = <iframe width="420" height="315" src={this.props.trailerUrl} frameborder="0" allowfullscreen></iframe>
     } else {
-      var trailer = ""
+      var trailer = this.props.description
     }
     return (
       <div className="well">
         {trailer}
-        <h2>{this.props.title}</h2><h4>{this.props.year}</h4>
-        <AddToMyShowsButton show={this.props}>Add to My Shows</AddToMyShowsButton>
+        <h2>{this.props.title}</h2><h4>Premiered in {this.props.year}, {this.props.episodes} aired episodes</h4>
+        <AddToMyShowsButton key={this.props.key} show={this.props}>Add to My Shows</AddToMyShowsButton>
       </div>
     )
   }

@@ -49,7 +49,7 @@ class ShowsSearch extends React.Component {
   render(){
     try {
       var searchedShowsList = this.props.searchedShows.map((show, index) =>
-        <ShowCard title={show.title} trailerUrl={show.trailer} year={show.year} />
+        <ShowCard title={show.title} episodes={show.aired_episodes} trailerUrl={show.trailer} year={show.year} description={show.overview} />
       )
     } catch(err) {
       console.log(err)
