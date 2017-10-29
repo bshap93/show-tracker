@@ -27,6 +27,7 @@ gem 'active_model_serializers'
 gem 'foreman', '~> 0.82.0'
 gem 'rack-cors'
 gem 'pry'
+gem 'responders'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
