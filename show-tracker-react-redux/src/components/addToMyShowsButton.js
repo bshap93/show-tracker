@@ -1,20 +1,27 @@
 import React from 'react';
+import fetch from 'isomorphic-fetch'
 
 class AddToMyShowsButton extends React.Component {
   handleOnClick = () => {
     var keyId = this.props.key;
     var showData = this.props.show;
 
-    fetch("/api/v1/my_shows", {
-      method: "post",
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        id: keyId
-      })
-    }).then(resp => console.log(resp))
+    // const options = {
+    //   method: 'POST',
+    //   headers: {
+    //     'Accept': 'application/json',
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify({
+    //     my_show: {
+    //       id: keyId,
+    //     }
+    //   })
+    // }
+    //
+    // fetch('api/v1/my_shows', options)
+    //   .then(response => response.json())
+    //   .then(json => console.log(json))
   }
 
   render() {
