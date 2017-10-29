@@ -1,7 +1,7 @@
 import React from 'react';
 import AddToMyShowsButton from './addToMyShowsButton.js'
 
-class MoviesAbout extends React.Component {
+class ShowCard extends React.Component {
   render() {
     if (this.props.trailerUrl) {
       var trailer = <iframe width="420" height="315" src={this.props.trailerUrl} frameborder="0" allowfullscreen></iframe>
@@ -18,4 +18,4 @@ class MoviesAbout extends React.Component {
   }
 }
 
-export default MoviesAbout
+export default ShowCard

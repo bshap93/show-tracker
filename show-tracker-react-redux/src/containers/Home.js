@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { addPopularShow } from '../actions/addPopularShow.js'
 import ShowCard from '../components/ShowCard.js'
+import { TRAKT_API_KEY } from "../env.js"
 
 
 class Home extends React.Component {
@@ -20,7 +21,7 @@ class Home extends React.Component {
       headers: {
         "Content-Type": "application/json",
         "trakt-api-version": "2",
-        "trakt-api-key": "46019919fb833c48658924cc9fcb451e78c5800099c02ce35eb9f4f40547093f"
+        "trakt-api-key": TRAKT_API_KEY
       },
     }).then(response => response.json())
       .then(json => json.forEach((popularShow) => {

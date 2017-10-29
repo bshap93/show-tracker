@@ -7,7 +7,6 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { combineReducers } from 'redux';
 import rootReducer from './reducers/index.js'
-// const scrapeIt = require("scrape-it");
 
 
 const store = createStore(rootReducer);
