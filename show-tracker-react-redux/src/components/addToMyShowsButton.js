@@ -4,12 +4,12 @@ import MyShowService from '../services/MyShowService'
 
 class AddToMyShowsButton extends React.Component {
 
-  handleOnClick = (event) => {
+  handleOnSubmit = (event) => {
     event.preventDefault();
     var showData = this.props.data;
     var keyId = showData.ids.trakt;
-    var myShow = {
-      id: keyId
+    const myShow = {
+      title: "KSS"
     }
 
     MyShowService.createMyShow(myShow).then(myShow => console.log("Created Show: ", myShow))
@@ -18,7 +18,16 @@ class AddToMyShowsButton extends React.Component {
 
   render() {
     return (
-      <button onClick={this.handleOnClick}>Add to My Shows</button>
+      <form onSubmit={this.handleOnSubmit}>
+        <input
+          type="hidden"
+          name="title"
+          value={this.props.data.title}
+        />
+
+        <button>Add to My Shows</button>
+      </form>
+
     )
   }
 }

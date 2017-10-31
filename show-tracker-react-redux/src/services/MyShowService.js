@@ -10,9 +10,12 @@ const MyShowService = {
   createMyShow: (myShow) => {
     const request = {
       method: 'POST',
-      body: JSON.stringify(myShow),
-      contentType: 'application/json',
-      accepts: 'application/json'
+      body: JSON.stringify({
+        "my_show": myShow
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      }
     }
     return fetch(`${API_URL}/my_shows`, request)
       .then(response => response.json())

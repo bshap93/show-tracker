@@ -5,24 +5,24 @@ class Api::MyShowsController < ApplicationController
   end
 
   def create
-    @my_show = MyShow.find_or_create_by(id: my_show_params[:id])
-    binding.pry
+    debugger
+    render json: {"stuff" => params}
   end
-
-  def update
-  end
-
-  def destroy
-  end
-
-
-
-  def show
-  end
+  #
+  # def update
+  # end
+  #
+  # def destroy
+  # end
+  #
+  #
+  #
+  # def show
+  # end
 
   private
 
   def my_show_params
-    params.require(:my_show).permit(:id)
+    params.require(:my_show).permit(:id, :title)
   end
 end
