@@ -30,7 +30,7 @@ class MyShows extends React.Component {
   render(){
     try {
       var myShows = this.state.myShows.map((show, index) =>
-        <ShowCard key={show.ids.trakt} episodes={show.aired_episodes} title={show.title} trailerUrl={show.trailer} year={show.year} description={show.overview} />
+        <ShowCard key={show.trakt_id} episodes={show.number_of_shows_aired} title={show.title} trailerUrl={show.trailer_url} year={show.year} description={show.description} />
       )
     } catch(err) {
       console.log(err)
@@ -40,6 +40,7 @@ class MyShows extends React.Component {
     return (
       <div>
         <p className="well" >My Shows </p>
+        {myShows}
       </div>
     );
   }

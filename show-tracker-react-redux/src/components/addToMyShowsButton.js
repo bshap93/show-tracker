@@ -1,27 +1,19 @@
 import React from 'react';
 import fetch from 'isomorphic-fetch'
+import MyShowService from '../services/MyShowService'
 
 class AddToMyShowsButton extends React.Component {
 
   handleOnClick = (event) => {
     event.preventDefault();
-    var keyId = this.props.key;
-    var showData = this.props.show;
+    var showData = this.props.data;
+    var keyId = showData.ids.trakt;
+    var myShow = {
+      id: keyId
+    }
 
-    fetch('/api/v1/my_shows', {
-      credentials: "same-origin",
-      mode: 'cors',
-      header: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      method: 'post',
-      body: JSON.stringify({
-        id: keyId,
-      })
-    })
-      .then((response) => {console.log("Post Session Response: ", response)})
-      .catch((error) => {console.log("Error in the Post Session fetch: ", error)})
+    MyShowService.createMyShow(myShow).then(myShow => console.log("Created Show: ", myShow))
+
   }
 
   render() {

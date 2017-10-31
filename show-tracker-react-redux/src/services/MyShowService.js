@@ -5,6 +5,17 @@ const MyShowService = {
   fetchMyShows: () => {
     return fetch(`${API_URL}/my_shows`)
       .then(response => response.json())
+  },
+
+  createMyShow: (myShow) => {
+    const request = {
+      method: 'POST',
+      body: JSON.stringify(myShow),
+      contentType: 'application/json',
+      accepts: 'application/json'
+    }
+    return fetch(`${API_URL}/my_shows`, request)
+      .then(response => response.json())
   }
 }
 

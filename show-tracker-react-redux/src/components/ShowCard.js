@@ -1,5 +1,5 @@
 import React from 'react';
-import AddToMyShowsButton from './addToMyShowsButton.js'
+import AddToMyShowsButton from './AddToMyShowsButton.js'
 
 class ShowCard extends React.Component {
   render() {
@@ -12,7 +12,7 @@ class ShowCard extends React.Component {
       <div className="well col-sm-6">
         {trailer}
         <h2>{this.props.title}</h2><h4>Premiered in {this.props.year}, {this.props.episodes} aired episodes</h4>
-        <AddToMyShowsButton key={this.props.key} show={this.props}>Add to My Shows</AddToMyShowsButton>
+        <AddToMyShowsButton key={this.props.key} data={this.props.data}>Add to My Shows</AddToMyShowsButton>
       </div>
     )
   }

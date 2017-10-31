@@ -37,7 +37,7 @@ class Home extends React.Component {
   render() {
     try {
       var popShows = this.props.popularShows.map((show, index) =>
-        <ShowCard key={show.ids.trakt} episodes={show.aired_episodes} title={show.title} trailerUrl={show.trailer} year={show.year} description={show.overview} />
+        <ShowCard key={show.ids.trakt} episodes={show.aired_episodes} title={show.title} trailerUrl={show.trailer} year={show.year} description={show.overview} data={show} />
       )
     } catch(err) {
       console.log(err)
