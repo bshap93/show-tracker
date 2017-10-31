@@ -47,7 +47,9 @@ class Home extends React.Component {
       <div>
 
         <h1 className="">Popular Shows</h1>
-        {popShows}
+        <div class="border row">
+          {popShows}
+        </div>
       </div>
     )
   }

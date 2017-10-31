@@ -2,26 +2,26 @@ import React from 'react';
 import fetch from 'isomorphic-fetch'
 
 class AddToMyShowsButton extends React.Component {
-  handleOnClick = () => {
+
+  handleOnClick = (event) => {
+    event.preventDefault();
     var keyId = this.props.key;
     var showData = this.props.show;
 
-    // const options = {
-    //   method: 'POST',
-    //   headers: {
-    //     'Accept': 'application/json',
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify({
-    //     my_show: {
-    //       id: keyId,
-    //     }
-    //   })
-    // }
-    //
-    // fetch('api/v1/my_shows', options)
-    //   .then(response => response.json())
-    //   .then(json => console.log(json))
+    fetch('/api/v1/my_shows', {
+      credentials: "same-origin",
+      mode: 'cors',
+      header: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: 'post',
+      body: JSON.stringify({
+        id: keyId,
+      })
+    })
+      .then((response) => {console.log("Post Session Response: ", response)})
+      .catch((error) => {console.log("Error in the Post Session fetch: ", error)})
   }
 
   render() {

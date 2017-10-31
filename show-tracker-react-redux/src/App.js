@@ -10,8 +10,22 @@ import ShowsSearch from './containers/ShowsSearch.js'
 import MyShows from './containers/MyShows.js'
 import Header from './components/Header.js'
 import NotFound from './components/NotFound.js'
+const scrapeIt = require("scrape-it")
 
 class App extends Component {
+  componentDidMount() {
+    scrapeIt("https://ionicabizau.net", {
+        title: ".header h1"
+      , desc: ".header h2"
+      , avatar: {
+            selector: ".header img"
+          , attr: "src"
+        }
+    }).then(page => {
+        console.log(page)
+    })
+  }
+
   render() {
     return (
       <div className="App">
