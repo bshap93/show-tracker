@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171025222745) do
+ActiveRecord::Schema.define(version: 20171031200703) do
 
   create_table "my_shows", force: :cascade do |t|
     t.string  "title"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 20171025222745) do
     t.text    "description"
     t.text    "extended_info"
     t.integer "number_of_shows_aired"
+    t.string  "trakt_id"
+    t.string  "trailer_url"
   end
 
 end

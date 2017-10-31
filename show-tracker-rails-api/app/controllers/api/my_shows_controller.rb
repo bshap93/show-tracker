@@ -1,4 +1,9 @@
-class Api::V1::MyShowsControllerController < ApplicationController
+class Api::MyShowsController < ApplicationController
+  def index
+    @my_shows = MyShow.all
+    render json: @my_shows
+  end
+
   def create
     @my_show = MyShow.find_or_create_by(id: my_show_params[:id])
     binding.pry
@@ -10,10 +15,7 @@ class Api::V1::MyShowsControllerController < ApplicationController
   def destroy
   end
 
-  def index
-    @my_shows = MyShow.all
-    render json: @my_shows
-  end
+
 
   def show
   end

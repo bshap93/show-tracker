@@ -17,17 +17,26 @@ class MyShows extends React.Component {
   }
 
   componentDidMount() {
-    debugger
-    MyShowService.fetchMyShows().then(shows => this.setState({shows}))
+    MyShowService.fetchMyShows().then(myShows => this.setState({ myShows }))
+    // .then(json => json.forEach((myShow) => {
+    //   var action = this.props.addMyShow(myShow)
+    //   console.log(this.props.store.getState())
+    // }))
+
     // fetch("localhost:3001/api/v1/my_shows", {credentials: 'same-origin'})
-    //   .then(resp => resp.json())
-    //   .then(json => json.forEach((myShow) => {
-    //     var action = this.props.addMyShow(myShow)
-    //     console.log(this.props.store.getState())
-    //   }))
+
   }
 
   render(){
+    try {
+      var myShows = this.state.myShows.map((show, index) =>
+        <ShowCard key={show.ids.trakt} episodes={show.aired_episodes} title={show.title} trailerUrl={show.trailer} year={show.year} description={show.overview} />
+      )
+    } catch(err) {
+      console.log(err)
+      var popShows = ""
+    }
+    console.log(this.state.myShows)
     return (
       <div>
         <p className="well" >My Shows </p>
