@@ -20,15 +20,22 @@ class AddToMyShowsButton extends React.Component {
     }
 
     MyShowService.createMyShow(myShow).then(myShow => console.log("Created Show: ", myShow))
-    
+
   }
 
   render() {
+    if (true) {
+      if (this.props.disabled) {
+        var theButton = <button className="bg-success text-white" disabled>Added</button>
+      } else {
+        var theButton = <button>Add to My Shows</button>
+      }
+    }
     return (
       <form onSubmit={this.handleOnSubmit}>
 
 
-        <button>Add to My Shows</button>
+        {theButton}
       </form>
 
     )

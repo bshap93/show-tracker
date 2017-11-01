@@ -11,20 +11,30 @@ import ShowsSearch from './containers/ShowsSearch.js'
 import MyShows from './containers/MyShows.js'
 import Header from './components/Header.js'
 import NotFound from './components/NotFound.js'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { addMyShow } from './actions/addMyShow.js';
+import { clearMyShows } from './actions/clearMyShows.js';
+import MyShowService from './services/MyShowService'
 const scrapeIt = require("scrape-it")
 
 class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      myShows: []
+    };
+  }
+
   componentDidMount() {
-    scrapeIt("https://ionicabizau.net", {
-        title: ".header h1"
-      , desc: ".header h2"
-      , avatar: {
-            selector: ".header img"
-          , attr: "src"
-        }
-    }).then(page => {
-        console.log(page)
-    })
+    this.props.clearMyShows();
+    MyShowService.fetchMyShows()//.then(myShows => this.setState({ myShows }))
+    .then(json => json.forEach((myShow) => {
+      var action = this.props.addMyShow(myShow)
+      console.log(this.props.store.getState())
+    }))
+
   }
 
   render() {
@@ -48,4 +58,19 @@ class App extends Component {
   }
 }
 
-export default App;
+
+const mapStateToProps = (state) => {
+  return {
+    myShows: state.myShows,
+  }
+}
+
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    addMyShow: addMyShow,
+    clearMyShows: clearMyShows
+  }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

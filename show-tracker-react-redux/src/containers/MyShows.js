@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { addMyShow } from '../actions/addMyShow.js';
+import { clearMyShows } from '../actions/clearMyShows.js';
 import React from 'react';
 import MyShowService from '../services/MyShowService'
 import { bindActionCreators } from 'redux';
@@ -17,6 +18,7 @@ class MyShows extends React.Component {
   }
 
   componentDidMount() {
+    this.props.clearMyShows()
     MyShowService.fetchMyShows()//.then(myShows => this.setState({ myShows }))
     .then(json => json.forEach((myShow) => {
       var action = this.props.addMyShow(myShow)
@@ -55,6 +57,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     addMyShow: addMyShow,
+    clearMyShows: clearMyShows
   }, dispatch);
 };
 

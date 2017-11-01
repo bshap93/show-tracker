@@ -58,6 +58,7 @@ class ShowsSearch extends React.Component {
     }
     return (
       <div>
+        <p className="well" >Add Shows </p>
         <form className="well" style={{ margin: '20px 250px' }} onSubmit={this.handleOnSubmit} >
           <input
             type="text"

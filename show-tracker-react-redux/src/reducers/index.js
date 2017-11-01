@@ -26,6 +26,8 @@ function myShowReducer(state = [], action) {
   switch (action.type) {
     case 'ADD_MY_SHOW':
       return state.concat(action.myShow)
+    case 'CLEAR_MY_SHOWS':
+      return [];
     default:
       return state;
   }
