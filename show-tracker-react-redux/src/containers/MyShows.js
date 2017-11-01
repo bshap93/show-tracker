@@ -17,11 +17,11 @@ class MyShows extends React.Component {
   }
 
   componentDidMount() {
-    MyShowService.fetchMyShows().then(myShows => this.setState({ myShows }))
-    // .then(json => json.forEach((myShow) => {
-    //   var action = this.props.addMyShow(myShow)
-    //   console.log(this.props.store.getState())
-    // }))
+    MyShowService.fetchMyShows()//.then(myShows => this.setState({ myShows }))
+    .then(json => json.forEach((myShow) => {
+      var action = this.props.addMyShow(myShow)
+      console.log(this.props.store.getState())
+    }))
 
     // fetch("localhost:3001/api/v1/my_shows", {credentials: 'same-origin'})
 

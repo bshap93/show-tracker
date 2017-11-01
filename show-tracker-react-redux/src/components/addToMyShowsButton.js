@@ -9,7 +9,14 @@ class AddToMyShowsButton extends React.Component {
     var showData = this.props.data;
     var keyId = showData.ids.trakt;
     const myShow = {
-      title: "KSS"
+      title: showData.title,
+      year: showData.year,
+      slug: showData.ids.slug,
+      description: showData.overview,
+      extended_info: showData,
+      number_of_shows_aired: showData.aired_episodes,
+      trakt_id: keyId,
+      trailer_url: showData.trailer
     }
 
     MyShowService.createMyShow(myShow).then(myShow => console.log("Created Show: ", myShow))

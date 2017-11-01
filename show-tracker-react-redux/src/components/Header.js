@@ -4,7 +4,7 @@ const Header = () => {
   return (
     <div>
       <header className="App-header">
-        <img src="http://www.iconsfind.com/wp-content/uploads/2017/06/20170602_5930b7ab7dae9.png" className="App-logo" alt="logo" />
+        <img src="http://clipart-library.com/img/1780044.png" className="App-logo" alt="logo" />
         <h1 className="App-title">Show Tracker</h1>
       </header>
       <p className="well">

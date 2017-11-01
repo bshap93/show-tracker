@@ -5,8 +5,12 @@ class Api::MyShowsController < ApplicationController
   end
 
   def create
-    debugger
-    render json: {"stuff" => params}
+    @my_show = MyShow.create(my_show_params)
+    if @my_show.save
+      render json: @my_show
+    else
+      render json: { errors: { message: "The Show Failed to Save" }}
+    end
   end
   #
   # def update
@@ -23,6 +27,6 @@ class Api::MyShowsController < ApplicationController
   private
 
   def my_show_params
-    params.require(:my_show).permit(:id, :title)
+    params.require(:my_show).permit(:id, :title, :description, :number_of_shows_aired, :slug, :trailer_url, :trakt_id, :year)
   end
 end

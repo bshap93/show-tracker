@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
-  Route
+  Route,
+  Switch
 } from 'react-router-dom';
 import './App.css';
 import NavBar from './components/NavBar.js'
@@ -33,10 +34,12 @@ class App extends Component {
         <Router>
           <div>
             <NavBar />
-            <Route exact path="/" render={(props) => (<Home store={this.props.store}/>)} />
-            <Route exact path="/myShows" render={(props) => (<MyShows store={this.props.store}/>)} />
-            <Route exact path="/myShows/new" render={(props) => (<ShowsSearch store={this.props.store}/>)} />
-            <Route exact path="*" component={NotFound} />
+            <Switch>
+              <Route exact path="/" render={(props) => (<Home store={this.props.store}/>)} />
+              <Route exact path="/myShows" render={(props) => (<MyShows store={this.props.store}/>)} />
+              <Route exact path="/myShows/new" render={(props) => (<ShowsSearch store={this.props.store}/>)} />
+              <Route  component={NotFound } />
+            </Switch>
             {/*<Route exact path="/myShows/new" render={AddShow} />*/}
           </div>
         </Router>
