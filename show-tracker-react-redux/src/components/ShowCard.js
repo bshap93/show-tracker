@@ -19,9 +19,15 @@ class ShowCard extends React.Component {
       var trailer = this.props.description
     }
 
+    if (this.props.columns === 1) {
+      var classRows = "well"
+    } else {
+      var classRows = "well col-sm-6"
+    }
+
 
     return (
-      <div className="well col-sm-6">
+      <div className={classRows}>
         {trailer}
         <h2>{this.props.title}</h2><h4>Premiered in {this.props.year}, {this.props.episodes} aired episodes</h4>
         {button}

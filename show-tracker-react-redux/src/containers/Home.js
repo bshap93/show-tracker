@@ -15,30 +15,31 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-
-    var popularShowsResp = fetch("https://api.trakt.tv/shows/popular?extended=full", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "trakt-api-version": "2",
-        "trakt-api-key": TRAKT_API_KEY
-      },
-    }).then(response => response.json())
-      .then(json => json.forEach((popularShow) => {
-        if (popularShow.trailer) {
-          popularShow.trailer = popularShow.trailer.replace("watch?v=", "embed/")
-        }
-        var action = this.props.addPopularShow(popularShow)
-        console.log(this.props.store.getState())
-      })
-    )
+    if (this.props.store.getState().popularShows.length === 0) {
+      var popularShowsResp = fetch("https://api.trakt.tv/shows/popular?extended=full", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "trakt-api-version": "2",
+          "trakt-api-key": TRAKT_API_KEY
+        },
+      }).then(response => response.json())
+        .then(json => json.forEach((popularShow) => {
+          if (popularShow.trailer) {
+            popularShow.trailer = popularShow.trailer.replace("watch?v=", "embed/")
+          }
+          var action = this.props.addPopularShow(popularShow)
+          console.log(this.props.store.getState())
+        })
+      )
+    }
   }
 
   render() {
     try {
 
       var popShows = this.props.popularShows.map((show, index) =>
-        <ShowCard traktKey={show.ids.trakt} episodes={show.aired_episodes} title={show.title} trailerUrl={show.trailer} year={show.year} description={show.overview} data={show} inMyShows={false} store={this.props.store} />
+        <ShowCard traktKey={show.ids.trakt} episodes={show.aired_episodes} title={show.title} trailerUrl={show.trailer} year={show.year} description={show.overview} data={show} inMyShows={false} store={this.props.store} columns={2} />
       )
     } catch(err) {
       console.log(err)
