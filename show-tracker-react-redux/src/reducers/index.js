@@ -33,10 +33,22 @@ function myShowReducer(state = [], action) {
   }
 }
 
+function myEpisodeReducer(state = [], action) {
+  switch (action.type) {
+    case 'ADD_EPISODE':
+      return state.concat(action.episode)
+    case 'CLEAR_MY_EPISODES':
+      return [];
+    default:
+      return state;
+  }
+}
+
 const rootReducer = combineReducers({
   popularShows: popularShowReducer,
   searchedShows: searhedShowReducer,
   myShows: myShowReducer,
+  myEpisodes: myEpisodeReducer
 })
 
 export default rootReducer

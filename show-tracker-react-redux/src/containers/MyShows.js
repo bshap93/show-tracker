@@ -5,6 +5,7 @@ import React from 'react';
 import MyShowService from '../services/MyShowService'
 import { bindActionCreators } from 'redux';
 import ShowCard from '../components/ShowCard.js'
+import Seasons from './Seasons'
 
 
 class MyShows extends React.Component {
@@ -13,7 +14,8 @@ class MyShows extends React.Component {
     super();
 
     this.state = {
-      myShows: []
+      myShows: [],
+      episodes: [],
     };
   }
 
@@ -52,6 +54,7 @@ class MyShows extends React.Component {
         </div>
 
         <div>
+          <Seasons store={this.props.store} />
         </div>
 
       </div>

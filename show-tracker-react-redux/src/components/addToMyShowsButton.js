@@ -30,13 +30,12 @@ class AddToMyShowsButton extends React.Component {
 
   handleOnClickEpisodes = (event) => {
     event.preventDefault();
-    debugger
     var showData = this.props.data;
-    var keyId = showData.ids.trakt;
+    var keyId = showData.trakt_id;
     const myShow = {
       title: showData.title,
       year: showData.year,
-      slug: showData.ids.slug,
+      slug: showData.slug,
       description: showData.overview,
       extended_info: showData,
       number_of_shows_aired: showData.aired_episodes,
@@ -44,7 +43,10 @@ class AddToMyShowsButton extends React.Component {
       trailer_url: showData.trailer
     }
 
-    MyShows.showEpisodes(myShow)
+    MyShowService.fetchSeasons(myShow)
+      .then(seasons => {
+        console.log("Seasons: ", seasons);
+      })
   }
 
   render() {
