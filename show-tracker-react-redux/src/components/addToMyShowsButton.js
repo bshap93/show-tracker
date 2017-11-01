@@ -20,17 +20,13 @@ class AddToMyShowsButton extends React.Component {
     }
 
     MyShowService.createMyShow(myShow).then(myShow => console.log("Created Show: ", myShow))
-
+    
   }
 
   render() {
     return (
       <form onSubmit={this.handleOnSubmit}>
-        <input
-          type="hidden"
-          name="title"
-          value={this.props.data.title}
-        />
+
 
         <button>Add to My Shows</button>
       </form>

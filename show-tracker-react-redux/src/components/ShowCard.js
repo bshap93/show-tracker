@@ -3,6 +3,7 @@ import AddToMyShowsButton from './AddToMyShowsButton.js'
 
 class ShowCard extends React.Component {
   render() {
+    debugger
     if (this.props.trailerUrl) {
       var trailer = <iframe width="315" height="200" src={this.props.trailerUrl} frameborder="0" allowfullscreen></iframe>
     } else {

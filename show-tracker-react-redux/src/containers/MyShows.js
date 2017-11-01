@@ -29,8 +29,8 @@ class MyShows extends React.Component {
 
   render(){
     try {
-      var myShows = this.state.myShows.map((show, index) =>
-        <ShowCard key={show.trakt_id} episodes={show.number_of_shows_aired} title={show.title} trailerUrl={show.trailer_url} year={show.year} description={show.description} />
+      var myShows = this.props.myShows.map((show, index) =>
+        <ShowCard traktKey={show.trakt_id} episodes={show.number_of_shows_aired} title={show.title} trailerUrl={show.trailer_url} year={show.year} description={show.description} inMyShows={true} store={this.props.store} />
       )
     } catch(err) {
       console.log(err)

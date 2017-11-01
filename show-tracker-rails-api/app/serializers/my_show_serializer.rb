@@ -1,3 +1,3 @@
 class MyShowSerializer < ActiveModel::Serializer
-  attributes :id, :title, :year, :poster_url, :slug, :description, :extended_info, :number_of_shows_aired
+  attributes :id, :title, :description, :number_of_shows_aired, :slug, :trailer_url, :trakt_id, :year
 end
