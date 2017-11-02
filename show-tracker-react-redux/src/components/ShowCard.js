@@ -8,9 +8,9 @@ class ShowCard extends React.Component {
     })
 
     if (listOfMyShowIds.includes('' + this.props.traktKey)) {
-      var button = <AddToMyShowsButton key={this.props.key} data={this.props.data} inMyShows={this.props.inMyShows} disabled={true}>Add to My Shows</AddToMyShowsButton>
+      var button = <AddToMyShowsButton key={this.props.key} data={this.props.data} inMyShows={this.props.inMyShows} disabled={true} store={this.props.store}>Add to My Shows</AddToMyShowsButton>
     } else {
-      var button = <AddToMyShowsButton key={this.props.key} data={this.props.data} inMyShows={this.props.inMyShows} disabled={false}>Add to My Shows</AddToMyShowsButton>
+      var button = <AddToMyShowsButton key={this.props.key} data={this.props.data} inMyShows={this.props.inMyShows} disabled={false} store={this.props.store}>Add to My Shows</AddToMyShowsButton>
     }
 
     if (this.props.trailerUrl) {

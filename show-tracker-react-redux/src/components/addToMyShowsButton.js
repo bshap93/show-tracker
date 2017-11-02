@@ -2,6 +2,11 @@ import React from 'react';
 import fetch from 'isomorphic-fetch'
 import MyShowService from '../services/MyShowService'
 import MyShows from '../containers/MyShows'
+import { addSeason } from '../actions/addSeason'
+import { clearSeasons } from '../actions/clearSeasons'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
 
 class AddToMyShowsButton extends React.Component {
 
@@ -44,9 +49,10 @@ class AddToMyShowsButton extends React.Component {
     }
 
     MyShowService.fetchSeasons(myShow)
-      .then(seasons => {
-        console.log("Seasons: ", seasons);
+      .then(seasons => seasons.forEach((season) => {
+        var action = this.props.addSeason(season)
       })
+    )
   }
 
   render() {
@@ -68,6 +74,18 @@ class AddToMyShowsButton extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return { seasons: state.seasons}
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    addSeason: addSeason,
+    clearSeasons: clearSeasons
+  }, dispatch);
+};
 
 
-export default AddToMyShowsButton
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddToMyShowsButton)

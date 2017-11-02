@@ -44,17 +44,20 @@ class MyShows extends React.Component {
       console.log(err)
       var popShows = ""
     }
+    if (true) {
+      var seasonsComp = <Seasons store={this.props.store} />
+    }
     console.log(this.state.myShows)
     return (
       <div>
         <p className="well" >My Shows </p>
         <div className="col-sm-6">
-          <p>{myShows.length} Shows</p>
+          <p>{myShows.length} Shows</p><hr/>
           {myShows}
         </div>
 
         <div>
-          <Seasons store={this.props.store} />
+          {seasonsComp}
         </div>
 
       </div>
