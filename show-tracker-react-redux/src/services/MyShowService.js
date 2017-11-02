@@ -32,6 +32,10 @@ const MyShowService = {
         "trakt-api-key": TRAKT_API_KEY
       },
     }).then(response => response.json())
+  },
+
+  fetchEpisodes: (myShow, season) => {
+    return fetch
   }
 
 }

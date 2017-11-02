@@ -2,6 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import MyShowService from '../services/MyShowService'
 import { bindActionCreators } from 'redux';
+import { addEpisode } from '../actions/addEpisode'
+import { clearEpisodes } from '../actions/clearEpisodes'
+
 
 class Season extends React.Component {
   constructor() {
@@ -14,6 +17,8 @@ class Season extends React.Component {
 
   handleSeasonClick = (event) => {
     var seasonNum = event.target.childNodes[1]
+    const myShow = this.props.store.getState().currentShow
+    debugger
   }
 
 

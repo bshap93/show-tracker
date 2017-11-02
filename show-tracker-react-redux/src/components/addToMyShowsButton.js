@@ -4,6 +4,7 @@ import MyShowService from '../services/MyShowService'
 import MyShows from '../containers/MyShows'
 import { addSeason } from '../actions/addSeason'
 import { clearSeasons } from '../actions/clearSeasons'
+import { setCurrentShow } from '../actions/setCurrentShow'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -47,7 +48,7 @@ class AddToMyShowsButton extends React.Component {
       trakt_id: keyId,
       trailer_url: showData.trailer
     }
-
+    this.props.setCurrentShow(myShow)
     MyShowService.fetchSeasons(myShow)
       .then(seasons => seasons.forEach((season) => {
         var action = this.props.addSeason(season)
@@ -81,7 +82,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     addSeason: addSeason,
-    clearSeasons: clearSeasons
+    clearSeasons: clearSeasons,
+    setCurrentShow: setCurrentShow
   }, dispatch);
 };
 

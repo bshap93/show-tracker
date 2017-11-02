@@ -55,12 +55,22 @@ function myEpisodeReducer(state = [], action) {
   }
 }
 
+function myCurrentShowReducer(state = {}, action) {
+  switch (action.type) {
+    case 'SET_CURRENT_SHOW':
+      return action.show
+    default:
+      return state;
+  }
+}
+
 const rootReducer = combineReducers({
   popularShows: popularShowReducer,
   searchedShows: searhedShowReducer,
   myShows: myShowReducer,
   episodes: myEpisodeReducer,
   seasons: mySeasonReducer,
+  currentShow: myCurrentShowReducer,
 
 })
 
