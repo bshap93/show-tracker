@@ -38,13 +38,15 @@ class MyShows extends React.Component {
 
     setInterval(() => {
       if (this.props.store.getState().episodes.length === 0) {
-        var nuthing = null
+        this.setState({
+          panel: <Seasons store={this.props.store} />
+        })
       } else {
         this.setState({
           panel: <Episodes store={this.props.store} />
         })
       }
-    }, 1000);
+    }, 2000);
 
     // fetch("localhost:3001/api/v1/my_shows", {credentials: 'same-origin'})
 

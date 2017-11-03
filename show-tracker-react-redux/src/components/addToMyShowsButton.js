@@ -4,6 +4,7 @@ import MyShowService from '../services/MyShowService'
 import MyShows from '../containers/MyShows'
 import { addSeason } from '../actions/addSeason'
 import { clearSeasons } from '../actions/clearSeasons'
+import { clearEpisodes } from '../actions/clearEpisodes'
 import { setCurrentShow } from '../actions/setCurrentShow'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -37,6 +38,7 @@ class AddToMyShowsButton extends React.Component {
   handleOnClickEpisodes = (event) => {
     event.preventDefault();
     this.props.clearSeasons()
+    this.props.clearEpisodes()
     var showData = this.props.data;
     var keyId = showData.trakt_id;
     const myShow = {
@@ -84,7 +86,8 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     addSeason: addSeason,
     clearSeasons: clearSeasons,
-    setCurrentShow: setCurrentShow
+    setCurrentShow: setCurrentShow,
+    clearEpisodes: clearEpisodes
   }, dispatch);
 };
 
