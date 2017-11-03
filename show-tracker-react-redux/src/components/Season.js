@@ -4,6 +4,7 @@ import MyShowService from '../services/MyShowService'
 import { bindActionCreators } from 'redux';
 import { addEpisode } from '../actions/addEpisode'
 import { clearEpisodes } from '../actions/clearEpisodes'
+import { clearSeasons } from '../actions/clearSeasons'
 
 
 class Season extends React.Component {
@@ -16,9 +17,16 @@ class Season extends React.Component {
   }
 
   handleSeasonClick = (event) => {
+    this.props.clearSeasons()
     var seasonNum = event.target.childNodes[1]
     const myShow = this.props.store.getState().currentShow
-    debugger
+
+    MyShowService.fetchEpisodes(myShow, seasonNum)
+    .then(episodes => episodes.forEach((episode) => {
+      var action = this.props.addEpisode(episode)
+      console.log(this.props.store.getState())
+      })
+    )
   }
 
 
@@ -38,6 +46,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
+    clearSeasons: clearSeasons,
     addEpisode: addEpisode,
     clearEpisodes: clearEpisodes
   }, dispatch);

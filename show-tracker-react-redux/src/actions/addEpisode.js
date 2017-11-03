@@ -1,6 +1,6 @@
 export const addEpisode = (episode) => {
   return {
-    type: 'ADD_EPISODES',
+    type: 'ADD_EPISODE',
     episode
   }
 }

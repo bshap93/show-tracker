@@ -35,7 +35,14 @@ const MyShowService = {
   },
 
   fetchEpisodes: (myShow, season) => {
-    return fetch
+    return fetch("https://api.trakt.tv/shows/" + myShow.slug + "/seasons/" + season.textContent, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "trakt-api-version": "2",
+        "trakt-api-key": TRAKT_API_KEY
+      },
+    }).then(response => response.json())
   }
 
 }

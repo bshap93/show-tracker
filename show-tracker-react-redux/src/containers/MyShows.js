@@ -6,6 +6,7 @@ import MyShowService from '../services/MyShowService'
 import { bindActionCreators } from 'redux';
 import ShowCard from '../components/ShowCard.js'
 import Seasons from './Seasons'
+import Episodes from './Episodes'
 
 
 class MyShows extends React.Component {
@@ -44,8 +45,10 @@ class MyShows extends React.Component {
       console.log(err)
       var popShows = ""
     }
-    if (true) {
+    if (this.props.store.getState().episodes.length === 0) {
       var seasonsComp = <Seasons store={this.props.store} />
+    } else {
+      var seasonsComp = <Episodes store={this.props.store} />
     }
     console.log(this.state.myShows)
     return (

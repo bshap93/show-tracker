@@ -36,6 +36,7 @@ class AddToMyShowsButton extends React.Component {
 
   handleOnClickEpisodes = (event) => {
     event.preventDefault();
+    this.props.clearSeasons()
     var showData = this.props.data;
     var keyId = showData.trakt_id;
     const myShow = {
