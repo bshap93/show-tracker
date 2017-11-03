@@ -35,7 +35,7 @@ const MyShowService = {
   },
 
   fetchEpisodes: (myShow, season) => {
-    return fetch("https://api.trakt.tv/shows/" + myShow.slug + "/seasons/" + season.textContent, {
+    return fetch("https://api.trakt.tv/shows/" + myShow.slug + "/seasons/" + season.textContent + "?extended=full", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

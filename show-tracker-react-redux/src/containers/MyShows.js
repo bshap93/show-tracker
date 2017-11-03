@@ -58,7 +58,7 @@ class MyShows extends React.Component {
 
   render(){
     try {
-      var myShows = this.props.myShows.reverse().map((show, index) =>
+      var myShows = this.props.myShows.map((show, index) =>
         <ShowCard traktKey={show.trakt_id} episodes={show.number_of_shows_aired} title={show.title} data={show} trailerUrl={show.trailer_url} year={show.year} description={show.description} inMyShows={true} store={this.props.store} columns={1} />
       )
     } catch(err) {
