@@ -18,6 +18,7 @@ class Season extends React.Component {
 
   handleSeasonClick = (event) => {
     this.props.clearSeasons()
+    this.props.store.dispatch(this.props.clearEpisodes())
     var seasonNum = event.target.childNodes[1]
     const myShow = this.props.store.getState().currentShow
 

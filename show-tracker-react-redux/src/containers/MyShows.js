@@ -17,6 +17,7 @@ class MyShows extends React.Component {
     this.state = {
       myShows: [],
       episodes: [],
+      panel: null
     };
   }
 
@@ -31,8 +32,25 @@ class MyShows extends React.Component {
       var action = this.props.addMyShow(myShow)
       console.log(this.props.store.getState())
     }))
+    this.setState({
+      panel: <Seasons store={this.props.store} />
+    })
+
+    setInterval(() => {
+      if (this.props.store.getState().episodes.length === 0) {
+        var nuthing = null
+      } else {
+        this.setState({
+          panel: <Episodes store={this.props.store} />
+        })
+      }
+    }, 1000);
 
     // fetch("localhost:3001/api/v1/my_shows", {credentials: 'same-origin'})
+
+  }
+
+  componentDidUpdate( ) {
 
   }
 
@@ -45,11 +63,7 @@ class MyShows extends React.Component {
       console.log(err)
       var popShows = ""
     }
-    if (this.props.store.getState().episodes.length === 0) {
-      var seasonsComp = <Seasons store={this.props.store} />
-    } else {
-      var seasonsComp = <Episodes store={this.props.store} />
-    }
+
     console.log(this.state.myShows)
     return (
       <div>
@@ -60,7 +74,7 @@ class MyShows extends React.Component {
         </div>
 
         <div>
-          {seasonsComp}
+          {this.state.panel}
         </div>
 
       </div>
