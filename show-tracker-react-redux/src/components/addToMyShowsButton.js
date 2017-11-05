@@ -6,12 +6,22 @@ import Added from './Added'
 import { addSeason } from '../actions/addSeason'
 import { clearSeasons } from '../actions/clearSeasons'
 import { clearEpisodes } from '../actions/clearEpisodes'
+import { clearMyShows } from '../actions/clearMyShows'
 import { setCurrentShow } from '../actions/setCurrentShow'
+import { addMyShow } from '../actions/addMyShow'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 
 class AddToMyShowsButton extends React.Component {
+
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      inMyShowsState: this.props.inMyShows
+    }
+  }
 
   handleOnClickAdd = (event) => {
     var showData = this.props.data;
@@ -78,7 +88,11 @@ class AddToMyShowsButton extends React.Component {
 
     MyShowService.deleteMyShow(myShow)
       .then(json => console.log(json))
+    this.setState({
+      inMyShowsState: false
+    })
   }
+
 
   render() {
     if (!this.props.inMyShows) {
@@ -88,11 +102,18 @@ class AddToMyShowsButton extends React.Component {
         var theButton = <form onSubmit={this.handleOnClickAdd}><button >Add to My Shows</button></form>
       }
     } else {
-      var theButton =
-      <div>
-        <button onClick={event => this.handleOnClickShowDelete(event)}>Delete from My Shows</button>
-        <button onClick={event => this.handleOnClickEpisodes(event)}>View Episodes</button>
-      </div>
+      if (this.state.inMyShowsState) {
+        var theButton =
+        <div>
+          <button onClick={event => this.handleOnClickShowDelete(event)}>Delete from My Shows</button>
+          <button onClick={event => this.handleOnClickEpisodes(event)}>View Episodes</button>
+        </div>
+      } else {
+        var theButton =
+        <div>
+          <button className="bg-warning text-white" disabled>Deleted from My Shows</button>
+        </div>
+      }
     }
     return (
       <div>
@@ -112,7 +133,9 @@ const mapDispatchToProps = (dispatch) => {
     addSeason: addSeason,
     clearSeasons: clearSeasons,
     setCurrentShow: setCurrentShow,
-    clearEpisodes: clearEpisodes
+    clearEpisodes: clearEpisodes,
+    clearMyShows: clearMyShows,
+    addMyShow: addMyShow,
   }, dispatch);
 };
 

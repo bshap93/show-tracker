@@ -36,6 +36,10 @@ class ShowsSearch extends React.Component {
           console.log(this.props.store.getState())
         }))
     }
+
+    setInterval(() => {
+      this.setState(this.state)
+    }, 2000);
   }
 
   handleOnChange = event => {

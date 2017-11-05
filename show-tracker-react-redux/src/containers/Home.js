@@ -14,6 +14,8 @@ class Home extends React.Component {
     }
   }
 
+
+
   componentDidMount() {
     if (this.props.store.getState().popularShows.length === 0) {
       var popularShowsResp = fetch("https://api.trakt.tv/shows/popular?extended=full", {
@@ -33,6 +35,9 @@ class Home extends React.Component {
         })
       )
     }
+    setInterval(() => {
+      this.setState(this.state)
+    }, 2000);
   }
 
   render() {
