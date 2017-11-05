@@ -23,6 +23,21 @@ const MyShowService = {
       .then(response => response.json())
   },
 
+  deleteMyShow: (myShow) => {
+    const request = {
+      method: 'DELETE',
+      body: JSON.stringify({
+        "my_show": myShow
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    }
+
+    return fetch(`${API_URL}/my_shows/${myShow.id}`, request)
+      .then(response => response.json())
+  },
+
   fetchSeasons: (myShow) => {
     return fetch("https://api.trakt.tv/shows/" + myShow.slug + "/seasons", {
       method: "GET",

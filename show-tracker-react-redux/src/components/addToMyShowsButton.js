@@ -60,6 +60,26 @@ class AddToMyShowsButton extends React.Component {
     )
   }
 
+  handleOnClickShowDelete = (event) => {
+    event.preventDefault();
+    var showData = this.props.data;
+    var keyId = showData.trakt_id;
+    const myShow = {
+      id: showData.id,
+      title: showData.title,
+      year: showData.year,
+      slug: showData.slug,
+      description: showData.overview,
+      extended_info: showData,
+      number_of_shows_aired: showData.aired_episodes,
+      trakt_id: keyId,
+      trailer_url: showData.trailer
+    }
+
+    MyShowService.deleteMyShow(myShow)
+      .then(json => console.log(json))
+  }
+
   render() {
     if (!this.props.inMyShows) {
       if (this.props.disabled) {
@@ -68,7 +88,11 @@ class AddToMyShowsButton extends React.Component {
         var theButton = <form onSubmit={this.handleOnClickAdd}><button >Add to My Shows</button></form>
       }
     } else {
-      var theButton = <button onClick={event => this.handleOnClickEpisodes(event)}>View Episodes</button>
+      var theButton =
+      <div>
+        <button onClick={event => this.handleOnClickShowDelete(event)}>Delete from My Shows</button>
+        <button onClick={event => this.handleOnClickEpisodes(event)}>View Episodes</button>
+      </div>
     }
     return (
       <div>
