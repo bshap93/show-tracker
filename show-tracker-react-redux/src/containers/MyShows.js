@@ -21,13 +21,10 @@ class MyShows extends React.Component {
     };
   }
 
-  showEpisodes = (show) => {
-
-  }
 
   componentDidMount() {
     this.props.clearMyShows()
-    MyShowService.fetchMyShows()//.then(myShows => this.setState({ myShows }))
+    MyShowService.fetchMyShows()
     .then(json => json.forEach((myShow) => {
       var action = this.props.addMyShow(myShow)
       console.log(this.props.store.getState())
@@ -49,10 +46,6 @@ class MyShows extends React.Component {
     }, 2000);
 
     // fetch("localhost:3001/api/v1/my_shows", {credentials: 'same-origin'})
-
-  }
-
-  componentDidUpdate( ) {
 
   }
 

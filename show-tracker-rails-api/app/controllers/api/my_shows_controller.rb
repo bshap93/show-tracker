@@ -12,6 +12,16 @@ class Api::MyShowsController < ApplicationController
       render json: { errors: { message: "The Show Failed to Save" }}
     end
   end
+
+
+  def destroy
+    @my_show = MyShow.find(my_show_params[:id])
+    if @my_show.destroy
+      render json: { message: "Deleted" }
+    else
+      render json: { errors: { message: "The Show Failed to Destroy" }}
+    end
+  end
   #
   # def update
   # end

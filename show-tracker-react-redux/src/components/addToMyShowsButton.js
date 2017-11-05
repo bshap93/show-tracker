@@ -2,6 +2,7 @@ import React from 'react';
 import fetch from 'isomorphic-fetch'
 import MyShowService from '../services/MyShowService'
 import MyShows from '../containers/MyShows'
+import Added from './Added'
 import { addSeason } from '../actions/addSeason'
 import { clearSeasons } from '../actions/clearSeasons'
 import { clearEpisodes } from '../actions/clearEpisodes'
@@ -62,7 +63,7 @@ class AddToMyShowsButton extends React.Component {
   render() {
     if (!this.props.inMyShows) {
       if (this.props.disabled) {
-        var theButton = <form><button className="bg-success text-white" disabled>Added</button></form>
+        var theButton = <Added />
       } else {
         var theButton = <form onSubmit={this.handleOnClickAdd}><button >Add to My Shows</button></form>
       }

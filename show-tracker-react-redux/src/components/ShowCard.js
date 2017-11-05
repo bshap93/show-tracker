@@ -1,4 +1,5 @@
 import React from 'react';
+import Trailer from './Trailer'
 import AddToMyShowsButton from './AddToMyShowsButton.js'
 
 class ShowCard extends React.Component {
@@ -14,7 +15,7 @@ class ShowCard extends React.Component {
     }
 
     if (this.props.trailerUrl) {
-      var trailer = <iframe width="315" height="200" src={this.props.trailerUrl} frameborder="0" allowfullscreen></iframe>
+      var trailer = <Trailer trailerUrl={this.props.trailerUrl}/> //
     } else {
       var trailer = this.props.description
     }
