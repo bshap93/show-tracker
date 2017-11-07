@@ -38,6 +38,28 @@ const MyShowService = {
       .then(response => response.json())
   },
 
+  fetchShow: (myShow) => {
+    return fetch(`https://api.trakt.tv/shows/${myShow.slug}?extended=full`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "trakt-api-version": "2",
+        "trakt-api-key": TRAKT_API_KEY
+      },
+    }).then(response => response.json())
+  },
+
+  fetchLatestEpisode: (myShow) => {
+    return fetch(`https://api.trakt.tv/shows/${myShow.slug}/last_episode?extended=full`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "trakt-api-version": "2",
+        "trakt-api-key": TRAKT_API_KEY
+      },
+    }).then(response => response.json())
+  },
+
   fetchSeasons: (myShow) => {
     return fetch("https://api.trakt.tv/shows/" + myShow.slug + "/seasons", {
       method: "GET",

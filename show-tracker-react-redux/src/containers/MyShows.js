@@ -29,9 +29,11 @@ class MyShows extends React.Component {
       var action = this.props.addMyShow(myShow)
       console.log(this.props.store.getState())
     }))
+
     this.setState({
       panel: <Seasons store={this.props.store} />
     })
+
 
     // setInterval(() => {
     //   this.props.clearMyShows()
