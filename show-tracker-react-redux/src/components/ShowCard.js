@@ -1,8 +1,65 @@
 import React from 'react';
 import Trailer from './Trailer'
 import AddToMyShowsButton from './AddToMyShowsButton.js'
+import MyShowService from '../services/MyShowService'
+import { addEpisode } from '../actions/addEpisode'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
 
 class ShowCard extends React.Component {
+  constructor() {
+    super()
+
+    this.state = {
+      newEpisodes: (<button className="btn btn-primary disabled" disabled>"No new Episodes"</button>),
+      myShow: null
+    }
+  }
+
+  componentDidMount() {
+    if (this.props.data.id){
+      var updatedShow = MyShowService.fetchShow(this.props.data)
+        .then(json => this.checkIfEpisodesChange(json))
+    } else {
+      this.setState({
+        newEpisodes: null
+      })
+    }
+  }
+
+
+  checkIfEpisodesChange = (show) => {
+    if (show.aired_episodes > this.props.data.number_of_shows_aired) {
+      this.setState({
+        newEpisodes: <button className="btn btn-primary active" onClick={this.handleNewEpisodesClick}>{`${show.title} has ${(show.aired_episodes - this.props.data.number_of_shows_aired)} new episodes`}</button>,
+        myShow: {
+          title: show.title,
+          year: show.year,
+          slug: show.ids.slug,
+          description: show.overview,
+          extended_info: show,
+          number_of_shows_aired: show.aired_episodes,
+          trakt_id: show.ids.trakt_id,
+          trailer_url: show.trailer
+        }
+      })
+    }
+  }
+
+  handleNewEpisodesClick = () => {
+    MyShowService.deleteMyShow(this.props.data)
+    MyShowService.createMyShow(this.state.myShow)
+    this.displayNewEpisode()
+  }
+
+  displayNewEpisode = () => {
+    MyShowService.fetchLatestEpisode(this.state.myShow)
+      .then(json => {
+        this.props.addEpisode(json)
+      })
+  }
+
   render() {
     var listOfMyShowIds = this.props.store.getState().myShows.map(show => {
       return show.trakt_id
@@ -25,16 +82,26 @@ class ShowCard extends React.Component {
     } else {
       var classRows = "well col-sm-6"
     }
-
+    // if (this.props.data.id){
+    //   var newEpisodes = <button >{}</button>
+    // }
 
     return (
       <div className={classRows}>
         {trailer}
         <h2>{this.props.title}</h2><h4>Premiered in {this.props.year}, {this.props.episodes} aired episodes</h4>
+        {this.state.newEpisodes}
         {button}
       </div>
     )
   }
 }
 
-export default ShowCard
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    addEpisode: addEpisode
+  }, dispatch);
+};
+
+
+export default connect(null, mapDispatchToProps)(ShowCard)
