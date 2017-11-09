@@ -12,7 +12,7 @@ class ShowCard extends React.Component {
     super()
 
     this.state = {
-      newEpisodes: "No new Episodes",
+      newEpisodes: (<button className="btn btn-primary disabled" disabled>"No new Episodes"</button>),
       myShow: null
     }
   }
@@ -21,6 +21,10 @@ class ShowCard extends React.Component {
     if (this.props.data.id){
       var updatedShow = MyShowService.fetchShow(this.props.data)
         .then(json => this.checkIfEpisodesChange(json))
+    } else {
+      this.setState({
+        newEpisodes: null
+      })
     }
   }
 
@@ -28,7 +32,7 @@ class ShowCard extends React.Component {
   checkIfEpisodesChange = (show) => {
     if (show.aired_episodes > this.props.data.number_of_shows_aired) {
       this.setState({
-        newEpisodes: `${show.title} has ${(show.aired_episodes - this.props.data.number_of_shows_aired)} new episodes`,
+        newEpisodes: <button className="btn btn-primary active" onClick={this.handleNewEpisodesClick}>{`${show.title} has ${(show.aired_episodes - this.props.data.number_of_shows_aired)} new episodes`}</button>,
         myShow: {
           title: show.title,
           year: show.year,
@@ -78,15 +82,15 @@ class ShowCard extends React.Component {
     } else {
       var classRows = "well col-sm-6"
     }
-    if (this.props.data.id){
-      var newEpisodes = <button onClick={this.handleNewEpisodesClick}>{this.state.newEpisodes}</button>
-    }
+    // if (this.props.data.id){
+    //   var newEpisodes = <button >{}</button>
+    // }
 
     return (
       <div className={classRows}>
         {trailer}
         <h2>{this.props.title}</h2><h4>Premiered in {this.props.year}, {this.props.episodes} aired episodes</h4>
-        {newEpisodes}
+        {this.state.newEpisodes}
         {button}
       </div>
     )
