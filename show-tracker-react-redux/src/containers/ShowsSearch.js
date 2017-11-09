@@ -17,7 +17,26 @@ class ShowsSearch extends React.Component {
     };
   }
 
-  componentDidUpdate() {
+  // componentDidMount( ) {
+  //   setInterval(() => {
+  //     this.setState(this.state)
+  //   }, 2000);
+  // }
+
+  // componentDidUpdate() {
+  //
+  // }
+
+  handleOnChange = event => {
+    console.log(this.state.searchedShows)
+    this.setState({
+      title: event.target.value,
+      searchedShows: []
+    });
+    this.props.clearSearchedShows();
+    if (this.props.store.getState().searchedShows.length > 10) {
+      this.props.clearSearchedShows();
+    }
     if (this.props.store.getState().searchedShows.length === 0) {
       var searchedShowResp = fetch("https://api.trakt.tv/search/show?query=" + this.state.title + "&limit=10&extended=full", {
         method: "GET",
@@ -36,19 +55,6 @@ class ShowsSearch extends React.Component {
           console.log(this.props.store.getState())
         }))
     }
-
-    setInterval(() => {
-      this.setState(this.state)
-    }, 2000);
-  }
-
-  handleOnChange = event => {
-    console.log(this.state.searchedShows)
-    this.setState({
-      title: event.target.value,
-      searchedShows: []
-    });
-    this.props.clearSearchedShows();
   }
 
   render(){
@@ -69,6 +75,7 @@ class ShowsSearch extends React.Component {
             onChange={this.handleOnChange}
             placeholder="Add a Show" />
         </form>
+        {this.props.store.getState().searchedShows.length}
         {searchedShowsList}
       </div>
     );
