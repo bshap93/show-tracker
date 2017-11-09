@@ -12,6 +12,10 @@ function popularShowReducer(state = [], action) {
 
 function searhedShowReducer(state = [], action) {
   switch (action.type) {
+    case 'START_ADDING_SEARCHED_SHOWS_REQUEST':
+      return Object.assign({}, state, {loading: true})
+    case 'ADD_SEARCHED_SHOWS':
+      return action.shows;
     case 'ADD_SEARCHED_SHOW':
       return state.concat(action.searchedShow)
     case 'CLEAR_SEARCHED_SHOWS':

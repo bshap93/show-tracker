@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { addSearchedShow, clearSearchedShows } from '../actions/addSearchedShow.js';
+import { fetchSearchedShows } from '../actions/fetchSearchedShows'
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import ShowCard from '../components/ShowCard.js'
@@ -24,29 +25,30 @@ class ShowsSearch extends React.Component {
   // }
 
   componentDidUpdate() {
-    setTimeout(() => {
-      // if (this.props.store.getState().searchedShows.length > 10) {
-      //   this.props.clearSearchedShows();
-      // }
-      if (this.props.store.getState().searchedShows.length === 0) {
-        var searchedShowResp = fetch("https://api.trakt.tv/search/show?query=" + this.state.title + "&limit=10&extended=full", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "trakt-api-version": "2",
-            "trakt-api-key": TRAKT_API_KEY
-          },
-        }).then(response => response.json())
-          .then(json => json.forEach((searchedShow) => {
-            searchedShow = searchedShow.show
-            if (searchedShow.trailer) {``
-              searchedShow.trailer = searchedShow.trailer.replace("watch?v=", "embed/")
-            }
-            var action = this.props.addSearchedShow(searchedShow)
-            console.log(this.props.store.getState())
-          }))
-      }
-    }, 1000);
+    console.log(this.props.store.getState())
+    // setTimeout(() => {
+    //   // if (this.props.store.getState().searchedShows.length > 10) {
+    //   //   this.props.clearSearchedShows();
+    //   // }
+    //   if (this.props.store.getState().searchedShows.length === 0) {
+    //     var searchedShowResp = fetch("https://api.trakt.tv/search/show?query=" + this.state.title + "&limit=10&extended=full", {
+    //       method: "GET",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //         "trakt-api-version": "2",
+    //         "trakt-api-key": TRAKT_API_KEY
+    //       },
+    //     }).then(response => response.json())
+    //       .then(json => json.forEach((searchedShow) => {
+    //         searchedShow = searchedShow.show
+    //         if (searchedShow.trailer) {``
+    //           searchedShow.trailer = searchedShow.trailer.replace("watch?v=", "embed/")
+    //         }
+    //         var action = this.props.addSearchedShow(searchedShow)
+    //
+    //       }))
+    //   }
+    // }, 1000);
 
   }
 
@@ -54,17 +56,16 @@ class ShowsSearch extends React.Component {
     console.log(this.state.searchedShows)
     this.setState({
       title: event.target.value,
-      searchedShows: []
     });
-    setTimeout(() => {
-      this.props.clearSearchedShows();
-    }, 500);
+    this.props.clearSearchedShows();
+    this.props.fetchSearchedShows(event.target.value);
+
   }
 
   render(){
     try {
       var searchedShowsList = this.props.searchedShows.map((show, index) =>
-        <ShowCard traktKey={show.ids.trakt} title={show.title} episodes={show.aired_episodes} trailerUrl={show.trailer} year={show.year} description={show.overview} data={show} inMyShows={false} store={this.props.store} columns={2} />
+        <ShowCard traktKey={show.show.ids.trakt} title={show.show.title} episodes={show.show.aired_episodes} trailerUrl={show.show.trailer} year={show.show.year} description={show.show.overview} data={show.show} inMyShows={false} store={this.props.store} columns={2} />
       )
     } catch(err) {
       console.log(err)
@@ -96,7 +97,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     addSearchedShow: addSearchedShow,
-    clearSearchedShows: clearSearchedShows
+    clearSearchedShows: clearSearchedShows,
+    fetchSearchedShows: fetchSearchedShows,
   }, dispatch);
 };
 
