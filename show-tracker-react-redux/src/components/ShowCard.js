@@ -1,5 +1,6 @@
 import React from 'react';
 import Trailer from './Trailer'
+import Likes from './Likes'
 import AddToMyShowsButton from './AddToMyShowsButton.js'
 import MyShowService from '../services/MyShowService'
 import { addEpisode } from '../actions/addEpisode'
@@ -13,7 +14,8 @@ class ShowCard extends React.Component {
 
     this.state = {
       newEpisodes: (<button className="btn btn-primary disabled" disabled>"No new Episodes"</button>),
-      myShow: null
+      myShow: null,
+      likes: 0
     }
   }
 
@@ -60,6 +62,23 @@ class ShowCard extends React.Component {
       })
   }
 
+  onClickLike = () => {
+    this.setState({
+      likes: ++this.state.likes,
+    })
+  }
+
+  callApi = () => {
+    console.log('a')
+    fetch("http://localhost:3001/api/my_shows")
+      .then(resp => {
+        console.log('b')
+        return resp.json()
+      })
+      .then(shows => console.log('c', shows))
+      console.log('d')
+  }
+
   render() {
     var listOfMyShowIds = this.props.store.getState().myShows.map(show => {
       return show.trakt_id
@@ -92,6 +111,7 @@ class ShowCard extends React.Component {
         <h2>{this.props.title}</h2><h4>Premiered in {this.props.year}, {this.props.episodes} aired episodes</h4>
         {this.state.newEpisodes}
         {button}
+        <Likes likes={this.state.likes} onClick={this.onClickLike} callApi={this.callApi}/>
       </div>
     )
   }

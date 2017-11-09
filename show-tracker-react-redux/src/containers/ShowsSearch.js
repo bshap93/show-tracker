@@ -23,9 +23,32 @@ class ShowsSearch extends React.Component {
   //   }, 2000);
   // }
 
-  // componentDidUpdate() {
-  //
-  // }
+  componentDidUpdate() {
+    setTimeout(() => {
+      // if (this.props.store.getState().searchedShows.length > 10) {
+      //   this.props.clearSearchedShows();
+      // }
+      if (this.props.store.getState().searchedShows.length === 0) {
+        var searchedShowResp = fetch("https://api.trakt.tv/search/show?query=" + this.state.title + "&limit=10&extended=full", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "trakt-api-version": "2",
+            "trakt-api-key": TRAKT_API_KEY
+          },
+        }).then(response => response.json())
+          .then(json => json.forEach((searchedShow) => {
+            searchedShow = searchedShow.show
+            if (searchedShow.trailer) {``
+              searchedShow.trailer = searchedShow.trailer.replace("watch?v=", "embed/")
+            }
+            var action = this.props.addSearchedShow(searchedShow)
+            console.log(this.props.store.getState())
+          }))
+      }
+    }, 1000);
+
+  }
 
   handleOnChange = event => {
     console.log(this.state.searchedShows)
@@ -33,28 +56,9 @@ class ShowsSearch extends React.Component {
       title: event.target.value,
       searchedShows: []
     });
-    this.props.clearSearchedShows();
-    if (this.props.store.getState().searchedShows.length > 10) {
+    setTimeout(() => {
       this.props.clearSearchedShows();
-    }
-    if (this.props.store.getState().searchedShows.length === 0) {
-      var searchedShowResp = fetch("https://api.trakt.tv/search/show?query=" + this.state.title + "&limit=10&extended=full", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "trakt-api-version": "2",
-          "trakt-api-key": TRAKT_API_KEY
-        },
-      }).then(response => response.json())
-        .then(json => json.forEach((searchedShow) => {
-          searchedShow = searchedShow.show
-          if (searchedShow.trailer) {
-            searchedShow.trailer = searchedShow.trailer.replace("watch?v=", "embed/")
-          }
-          var action = this.props.addSearchedShow(searchedShow)
-          console.log(this.props.store.getState())
-        }))
-    }
+    }, 500);
   }
 
   render(){
